@@ -2,49 +2,50 @@ import greenfoot.*;
 
 public class TurretBase extends Actor
 {
-    private double range;
-    private enum Targeting {
-        FIRST(0),
-        LAST(1),
-        CLOSE(2),
-        FAR(3);
+    int[] w;
+    int[] h;
 
-        private final int value;
-        Targeting(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-    }
-    Targeting mode = Targeting.FIRST;
     int id;
-    private int damage;
     private static int count = 0;
-    public TurretBase(double r, int d, String imageFileName){
+    private boolean canPlace = true;
+    private boolean buying = true;
+    public TurretBase(String imageFileName){
         setImage(imageFileName);
         id = count++;
-        range = r;
-        damage = d;
+        h = new int[]{0, getImage().getHeight()};
+        w = new int[]{0, getImage().getWidth()};
     }
+
     public void act() 
     {
+        if(buying){
+            if(canPlace && Greenfoot.mouseClicked(this)){
 
-    }
-    private double distanceTo(int x, int y){
-        return (int)Math.sqrt(Math.pow((getX()-x),2)+Math.pow((getY()-y),2));
+            }
+        }
     }
 
-    public int getDamage() {
-        return damage;
+    public void bounds(){
+        boolean t = true;
+        for(int i : w){
+            for(int j : h){
+                t = (getX() + i > 0 && getY() + j > 0 && getX() + i < MyWorld.image().getWidth() && getY() + j < MyWorld.image().getHeight() && t);
+            }
+        }
+        canPlace = t;
     }
-    public void alterDamage(int val){
-        damage += val;
+
+    public boolean place(){
+        if(getOneIntersectingObject(TurretBase.class) != null) return false;
+        for(int i : w){
+            for(int j : h){
+                if(MyWorld.check(MyWorld.image().getColorAt(getX()+i, getY()+j))) return false;
+            }
+        }
+        return true;
     }
-    public double getRange(){
-        return range;
-    }
-    public void alterRange(double val){
-        range += val;
+
+    public boolean canPlace(){
+        return canPlace;
     }
 }
