@@ -16,12 +16,15 @@ public class MyWorld extends World
         Timer++;
     }
     private void setup(){
-        setPaintOrder(WaveStart.class, TurretGunBase.class, TurretBase.class, Counter.class);
+        Timer=0;
+        setPaintOrder(PathFollow.class, WaveStart.class, ShopButton.class, ShopBG.class, TurretGunBase.class, BackGround.class, TurretBase.class, Enemy.class, Counter.class);
         addObject(new EnemyPath(), getWidth()/2, getHeight()/2);
         addObject(new BackGround(), getWidth()/2, getHeight()/2);
         addObject(new WaveStart(), 45, 110);
-        addObject(new Cash(START_CASH),50,23);
-        addObject(new Lives(START_LIVES),50,58);
+        addObject(new Cash(START_CASH),Cash.START_X_POS,23);
+        addObject(new Lives(START_LIVES),Lives.START_X_POS,58);
+        addObject(new Spawner(), 0, 0);
+        addObject(new ShopButton(),getWidth()-ShopButton.getWidth()/2,50);
     }
     public static GreenfootImage image(){
         return IMAGE;

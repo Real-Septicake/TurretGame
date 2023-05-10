@@ -5,18 +5,10 @@ import java.util.List;
 
 public class TurretGunBase extends Actor {
     private enum Targeting {
-        FIRST(0),
-        LAST(1),
-        CLOSE(2),
-        FAR(3);
-
-        private final int value;
-        Targeting(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
+        FIRST,
+        LAST,
+        CLOSE,
+        FAR
     }
 
     Targeting mode = Targeting.FIRST;
@@ -62,7 +54,7 @@ public class TurretGunBase extends Actor {
                 }
             }
         }
-        if(index != -1 && MyWorld.Timer - lastCheck <= cooldown){
+        if(index != -1 && MyWorld.Timer - lastCheck >= cooldown){
             e.get(index).damage(damage);
             lastCheck = MyWorld.Timer;
         }

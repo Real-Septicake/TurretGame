@@ -5,9 +5,11 @@ public class WaveStart extends Actor {
     private static final GreenfootImage going = new GreenfootImage("WaveGoing.png");
     private static boolean isGoing = false;
     public WaveStart(){
+        isGoing = false;
         setImage(start);
     }
     public void act() {
+        if(!isGoing && Greenfoot.mouseClicked(this)) isGoing = true;
         setImage((isGoing)?going:start);
     }
 

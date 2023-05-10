@@ -22,8 +22,8 @@ public class Enemy extends Actor {
     }
 
     public void act() {
-        move();
         path();
+        move();
     }
     public void damage(int d) {
         health -= d;
@@ -35,9 +35,11 @@ public class Enemy extends Actor {
     private void path(){
         PathFollow path = new PathFollow(getRotation(), getX(), getY());
         getWorld().addObject(path, 0, 0);
-        switch(path.pathCheck()){
-            case 1: turn(4);
-            case 2: turn(-4);
+        int c = path.pathCheck();
+        if(c == 1){
+            turn(4);
+        }else if(c == 2){
+            turn(-4);
         }
         getWorld().removeObject(path);
     }
@@ -46,6 +48,7 @@ public class Enemy extends Actor {
         distance += speed;
         if(isAtEdge()){
             Lives.alterLives(-maxHealth);
+            getWorld().removeObject(this);
         }
     }
     public Point locate(){
