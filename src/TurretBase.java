@@ -7,45 +7,45 @@ public class TurretBase extends Actor
 
     int id;
     private static int count = 0;
-    private boolean canPlace = true;
-    private boolean buying = true;
-    public TurretBase(String imageFileName){
-        setImage(imageFileName);
+    public boolean buying = true;
+    public TurretBase(GreenfootImage image){
+        setImage(image);
         id = count++;
-        h = new int[]{0, getImage().getHeight()};
-        w = new int[]{0, getImage().getWidth()};
+        h = new int[]{-(getImage().getHeight()/2), getImage().getHeight()/2};
+        w = new int[]{-(getImage().getWidth()/2), getImage().getWidth()/2};
     }
 
-    public void act() 
-    {
-        if(buying){
-            if(canPlace && Greenfoot.mouseClicked(this)){
-
-            }
+    public void act() {
+        if(buying && Greenfoot.getMouseInfo() != null){
+            setLocation(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
         }
     }
 
-    public void bounds(){
+    public boolean bounds(){
         boolean t = true;
         for(int i : w){
             for(int j : h){
-                t = (getX() + i > 0 && getY() + j > 0 && getX() + i < MyWorld.image().getWidth() && getY() + j < MyWorld.image().getHeight() && t);
+                t = (getX() + i > 0 && getY() + j > 0 && getX() + i < MyWorld.IMAGE.getWidth() && getY() + j < MyWorld.IMAGE.getHeight() && t);
             }
         }
-        canPlace = t;
+        return t;
     }
 
     public boolean place(){
-        if(getOneIntersectingObject(TurretBase.class) != null) return false;
+        if(getOneIntersectingObject(TurretBase.class) != null){
+            return false;
+        }
         for(int i : w){
             for(int j : h){
-                if(MyWorld.check(MyWorld.image().getColorAt(getX()+i, getY()+j))) return false;
+                if(MyWorld.check(MyWorld.IMAGE.getColorAt(getX()+i, getY()+j))){
+                    return false;
+                }
             }
         }
         return true;
     }
 
     public boolean canPlace(){
-        return canPlace;
+        return bounds() && place();
     }
 }

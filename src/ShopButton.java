@@ -13,13 +13,19 @@ public class ShopButton extends Actor {
             if(isOpen){
                 close();
             }else{
-                open();
+                openTurret();
             }
         }
         setImage(isOpen? TO_CLOSE : TO_OPEN);
     }
 
+    private void openTurret(){
+        open();
+        getWorld().addObject(new TurretBuy<>(200, TurretBasic::new),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,50);
+    }
+
     private void open(){
+        close();
         getWorld().addObject(new ShopBG(),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,getWorld().getHeight()/2);
         setLocation(getX()-ShopBG.IMAGE.getWidth(),getY());
         isOpen = true;
@@ -27,7 +33,7 @@ public class ShopButton extends Actor {
 
     public void close(){
         setLocation(getWorld().getWidth()- TO_OPEN.getWidth()/2,50);
-        getWorld().removeObjects(getWorld().getObjects(ShopBG.class));
+        getWorld().removeObjects(getWorld().getObjects(ShopCloseRemoves.class));
         isOpen = false;
     }
 
