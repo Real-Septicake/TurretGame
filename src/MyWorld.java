@@ -17,7 +17,8 @@ public class MyWorld extends World
     }
     private void setup(){
         Timer=0;
-        setPaintOrder(PathFollow.class, WaveStart.class, ShopButton.class, TurretBuy.class, ShopBG.class, TurretGunBase.class, BackGround.class, TurretBase.class, Enemy.class, Counter.class);
+        setActOrder(MyWorld.class, TurretGunBase.class, RangeDisplay.class);
+        setPaintOrder(PathFollow.class, WaveStart.class, ShopButton.class, TurretBuy.class, ModeCycle.class, ShopBG.class, TurretGunBase.class, BackGround.class, TurretBase.class, RangeDisplay.class, Enemy.class, Counter.class);
         addObject(new EnemyPath(), getWidth()/2, getHeight()/2);
         addObject(new BackGround(), getWidth()/2, getHeight()/2);
         addObject(new WaveStart(), 45, 110);

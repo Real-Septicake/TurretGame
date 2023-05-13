@@ -19,11 +19,10 @@ public abstract class TurretGunBase extends Actor {
     private int lastFireCheck = -1;
     protected int lastAnimCheck = -1;
     protected final int animLength;
-    private final TurretBase BASE;
+    private TurretBase BASE;
     private boolean baseMade = false;
 
-    public TurretGunBase(double r, int d, int cool, GreenfootImage baseImage, int anim){
-        BASE = new TurretBase(baseImage);
+    public TurretGunBase(double r, int d, int cool, int anim){
         range = r;
         damage = d;
         cooldown = cool;
@@ -32,16 +31,24 @@ public abstract class TurretGunBase extends Actor {
 
     public void act(){
         if(!baseMade){
+            BASE = new TurretBase(getBaseImage());
             getWorld().addObject(BASE, 0, 0);
             baseMade = true;
+            getWorld().addObject(new RangeDisplay(this), 0, 0);
         }
         if(!BASE.buying){
             aim();
         }
         setLocation(BASE.getX(), BASE.getY());
         move(getOffset());
-        if(BASE.buying && Greenfoot.mouseClicked(this) && BASE.canPlace()) {
-            BASE.buying = false;
+        if(Greenfoot.mouseClicked(this) ){
+            if(BASE.canPlace()){
+                if (BASE.buying) {
+                    BASE.buying = false;
+                }else{
+                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this);
+                }
+            }
         }
     }
 
@@ -89,6 +96,9 @@ public abstract class TurretGunBase extends Actor {
     public void alterRange(double val){
         range += val;
     }
+    public int getRange(){
+        return (int)range;
+    }
 
     public abstract int getOffset();
 
@@ -99,4 +109,20 @@ public abstract class TurretGunBase extends Actor {
     public abstract String getName();
 
     protected abstract void animate(boolean cool);
+
+    public TurretBase getBase(){
+        return BASE;
+    }
+
+    public String getMode(){
+        return mode.name();
+    }
+    public void cycleMode(){
+        switch(mode){
+            case FIRST: mode = Targeting.LAST; break;
+            case LAST: mode = Targeting.CLOSE; break;
+            case CLOSE: mode = Targeting.FAR; break;
+            case FAR: mode = Targeting.FIRST; break;
+        }
+    }
 }

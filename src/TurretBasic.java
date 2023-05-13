@@ -5,7 +5,7 @@ public class TurretBasic extends TurretGunBase {
     public static final GreenfootImage TURRET_FIRE = new GreenfootImage("BaseTurretFire.png");
     public static final GreenfootImage BASE = new GreenfootImage("BasicTurretBase.png");
     public TurretBasic(){
-        super(200, 1, 30, BASE, 8);
+        super(200, 1, 30, 8);
         setImage(TURRET_NORM);
     }
 
