@@ -10,9 +10,9 @@ public class TurretBase extends Actor
     public boolean buying = true;
     public TurretBase(GreenfootImage image){
         setImage(image);
-        System.out.println("Before: " + count);
+        //System.out.println("Before: " + count);
         id = count++;
-        System.out.println("Count After: " + count);
+        //System.out.println("Count After: " + count);
         h = new int[]{-(getImage().getHeight()/2), getImage().getHeight()/2};
         w = new int[]{-(getImage().getWidth()/2), getImage().getWidth()/2};
     }

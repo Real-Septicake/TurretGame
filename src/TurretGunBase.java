@@ -79,8 +79,8 @@ public abstract class TurretGunBase extends Actor {
             }
         }
         if(index != -1){
-            turnTowards(e.get(index).getX(), e.get(index).getY());
             if(MyWorld.Timer - lastFireCheck >= cooldown){
+                turnTowards(e.get(index).getX(), e.get(index).getY());
                 e.get(index).damage(damage);
                 lastFireCheck = MyWorld.Timer;
                 lastAnimCheck = MyWorld.Timer;

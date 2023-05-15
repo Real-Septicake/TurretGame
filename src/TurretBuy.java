@@ -15,7 +15,7 @@ public class TurretBuy<T extends TurretGunBase> extends ShopCloseRemoves {
         i.drawImage(t1,i.getWidth()/2-t1.getWidth()/2,i.getHeight()-t1.getHeight());
         i.drawImage(t2,i.getWidth()/2-t2.getWidth()/2,i.getHeight()-t1.getHeight()-t2.getHeight());
         i.drawImage(TU.getBaseImage(),i.getWidth()/2- TU.getBaseImage().getWidth()/2, TU.getBaseImage().getHeight()/2);
-        i.drawImage(TU.getTurretImage(),i.getWidth()/2- TU.getBaseImage().getWidth()/2+8, TU.getBaseImage().getHeight()/2-1);
+        i.drawImage(TU.getTurretImage(),i.getWidth()/2- TU.getBaseImage().getWidth()/2+TU.getOffset(), TU.getBaseImage().getHeight()/2);
         setImage(i);
     }
     public void act() {
