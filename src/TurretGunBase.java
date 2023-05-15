@@ -45,6 +45,7 @@ public abstract class TurretGunBase extends Actor {
             if(BASE.canPlace()){
                 if (BASE.buying) {
                     BASE.buying = false;
+                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this);
                 }else{
                     getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this);
                 }
@@ -79,8 +80,10 @@ public abstract class TurretGunBase extends Actor {
             }
         }
         if(index != -1){
-            if(MyWorld.Timer - lastFireCheck >= cooldown){
+            if(MyWorld.Timer - lastAnimCheck >= animLength){
                 turnTowards(e.get(index).getX(), e.get(index).getY());
+            }
+            if(MyWorld.Timer - lastFireCheck >= cooldown){
                 e.get(index).damage(damage);
                 lastFireCheck = MyWorld.Timer;
                 lastAnimCheck = MyWorld.Timer;

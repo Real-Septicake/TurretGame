@@ -22,13 +22,13 @@ public class ShopButton extends Actor {
     private void openTurret(){
         open();
         getWorld().addObject(new TurretBuy<>(50, TurretBasic::new),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,50);
-        getWorld().addObject(new TurretBuy<>(100, TurretSniper::new), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, 150);
+        getWorld().addObject(new TurretBuy<>(100, TurretSniper::new), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, 175);
     }
 
     public void openUpgrade(TurretGunBase t){
         open();
         getWorld().addObject(new RangeDisplay(t), t.getX(), t.getY());
-        getWorld().addObject(new ModeCycle(t), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,50);
+        getWorld().addObject(new ModeCycle(t), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,60);
     }
 
     private void open(){

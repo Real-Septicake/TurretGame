@@ -9,12 +9,16 @@ public class WaveStart extends Actor {
         setImage(start);
     }
     public void act() {
-        if(!isGoing && Greenfoot.mouseClicked(this)) isGoing = true;
+        if(!isGoing && Greenfoot.mouseClicked(this)){
+            isGoing = true;
+            getWorld().getObjects(Spawner.class).get(0).startWave();
+        }
         setImage((isGoing)?going:start);
     }
 
-    public static void waveDone(){
+    public void waveDone(){
         isGoing = false;
+        getWorld().removeObjects(getWorld().getObjects(EnemySpawner.class));
     }
 
     public static boolean isGoing(){
