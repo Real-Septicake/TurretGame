@@ -3,13 +3,13 @@ import greenfoot.*;
 public class PathFollow extends Actor {
     private final int x;
     private final int y;
-    private static final int gap=2;
-    public PathFollow(int r, int X, int Y){
+    private final int gap;
+    public PathFollow(int r, int X, int Y, int o){
         setRotation(r);
         x=X;
         y=Y;
+        gap = o;
     }
-    public void act(){}
     public int pathCheck(){
         GreenfootImage check=new GreenfootImage(7,25);
         check.setColor(Color.BLACK);

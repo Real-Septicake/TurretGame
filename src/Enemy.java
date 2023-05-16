@@ -7,8 +7,6 @@ public class Enemy extends Actor {
     private final int maxHealth;
     private final int speed;
     private double distance = 0;
-    private static int count = 0;
-    private final int id;
     private final int offset;
     private final int value;
 
@@ -18,7 +16,6 @@ public class Enemy extends Actor {
         speed = s;
         offset = o;
         value = v;
-        id = count++;
     }
 
     public void act() {
@@ -33,7 +30,7 @@ public class Enemy extends Actor {
         }
     }
     private void path(){
-        PathFollow path = new PathFollow(getRotation(), getX(), getY());
+        PathFollow path = new PathFollow(getRotation(), getX(), getY(), offset);
         getWorld().addObject(path, 0, 0);
         int c = path.pathCheck();
         if(c == 1){

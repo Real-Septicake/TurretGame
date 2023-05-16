@@ -5,6 +5,7 @@ public class Spawner extends Actor {
 
     //{Enemy count for wave, enemy spawn delay}
     private final int[][] basicSpawnInfo = new int[][]{{4, 50}};
+    private final int[][] heavySpawnInfo = new int[][]{{4, 50}};
 
     public Spawner(){
         GreenfootImage gi = new GreenfootImage(1,1);
@@ -29,5 +30,6 @@ public class Spawner extends Actor {
 
     public void startWave(){
         getWorld().addObject(new EnemySpawner<>(BasicE::new, basicSpawnInfo[wave][0], basicSpawnInfo[wave][1]), 0, 0);
+        getWorld().addObject(new EnemySpawner<>(HeavyE::new, heavySpawnInfo[wave][0], heavySpawnInfo[wave][1]), 0, 0);
     }
 }

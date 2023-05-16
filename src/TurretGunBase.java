@@ -15,12 +15,13 @@ public abstract class TurretGunBase extends Actor {
 
     private double range;
     private int damage;
-    private final int cooldown;
+    private int cooldown;
     private int lastFireCheck = -1;
     protected int lastAnimCheck = -1;
-    protected final int animLength;
+    protected int animLength;
     private TurretBase BASE;
     private boolean baseMade = false;
+
 
     public TurretGunBase(double r, int d, int cool, int anim){
         range = r;
@@ -102,6 +103,12 @@ public abstract class TurretGunBase extends Actor {
     public int getRange(){
         return (int)range;
     }
+    public void alterCooldown(int val){
+        cooldown += val;
+    }
+    public void alterAnimTime(int val){
+        animLength += val;
+    }
 
     public abstract int getOffset();
 
@@ -127,5 +134,11 @@ public abstract class TurretGunBase extends Actor {
             case CLOSE: mode = Targeting.FAR; break;
             case FAR: mode = Targeting.FIRST; break;
         }
+    }
+    public void applyUpgrade(Upgrade u){
+        alterDamage(u.getDamage());
+        alterCooldown(u.getCooldown());
+        alterRange(u.getRange());
+        alterAnimTime(u.getAnim());
     }
 }
