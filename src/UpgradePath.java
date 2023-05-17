@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class UpgradePath extends Actor {
+public class UpgradePath extends ShopCloseRemoves {
     private int upgradeNum = 0;
     private final Upgrade[] upgrades;
     private final TurretGunBase TURRET;
@@ -12,7 +12,10 @@ public class UpgradePath extends Actor {
     public void act(){
         if(Greenfoot.mouseClicked(this) && Cash.getCash() >= upgrades[upgradeNum].getCost()){
             Cash.alterCash(upgrades[upgradeNum].getCost());
-            TURRET.applyUpgrade(upgrades[upgradeNum++]);
+            if(TURRET != null){
+                TURRET.applyUpgrade(upgrades[upgradeNum]);
+            }
+            upgradeNum++;
             updateImage();
         }
     }
@@ -24,5 +27,8 @@ public class UpgradePath extends Actor {
         GreenfootImage text2 = new GreenfootImage("$"+upgrades[upgradeNum].getCost(), 24, Color.BLACK, null);
         gi.drawImage(text2, (gi.getWidth()/2) - text2.getWidth()/2, 144);
         setImage(gi);
+    }
+    public int getUpgradeNum(){
+        return upgradeNum;
     }
 }
