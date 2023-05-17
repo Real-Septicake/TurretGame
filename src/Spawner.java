@@ -29,7 +29,12 @@ public class Spawner extends Actor {
     }
 
     public void startWave(){
-        getWorld().addObject(new EnemySpawner<>(BasicE::new, basicSpawnInfo[wave][0], basicSpawnInfo[wave][1]), 0, 0);
-        getWorld().addObject(new EnemySpawner<>(HeavyE::new, heavySpawnInfo[wave][0], heavySpawnInfo[wave][1]), 0, 0);
+        if(wave < basicSpawnInfo.length){
+            getWorld().addObject(new EnemySpawner<>(BasicE::new, basicSpawnInfo[wave][0], basicSpawnInfo[wave][1]), 0, 0);
+            getWorld().addObject(new EnemySpawner<>(HeavyE::new, heavySpawnInfo[wave][0], heavySpawnInfo[wave][1]), 0, 0);
+        }else{
+            getWorld().addObject(new EnemySpawner<>(BasicE::new, (int)Math.ceil(wave*(wave*0.1)), (350/wave)), 0, 0);
+            getWorld().addObject(new EnemySpawner<>(HeavyE::new, (int)Math.ceil(wave*(wave*0.075)), (475/wave)), 0, 0);
+        }
     }
 }

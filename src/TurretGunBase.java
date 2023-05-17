@@ -37,11 +37,14 @@ public abstract class TurretGunBase extends Actor {
             baseMade = true;
             getWorld().addObject(new RangeDisplay(this), 0, 0);
         }
-        if(!BASE.buying){
+        if(!BASE.buying) {
             aim();
+            setLocation(BASE.getX(), BASE.getY());
+            move(getOffset());
+        }else if(Greenfoot.getMouseInfo() != null){
+            setLocation(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
+            move(getOffset());
         }
-        setLocation(BASE.getX(), BASE.getY());
-        move(getOffset());
         if(Greenfoot.mouseClicked(this) ){
             if(BASE.canPlace()){
                 if (BASE.buying) {
