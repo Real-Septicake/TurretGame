@@ -55,4 +55,7 @@ public class Enemy extends Actor {
     public double progress(){
         return distance;
     }
+    public int maxHealth(){
+        return maxHealth;
+    }
 }

@@ -8,7 +8,8 @@ public abstract class TurretGunBase extends Actor {
         FIRST,
         LAST,
         CLOSE,
-        FAR
+        FAR,
+        STRONG
     }
 
     Targeting mode = Targeting.FIRST;
@@ -80,6 +81,8 @@ public abstract class TurretGunBase extends Actor {
                     case CLOSE:
                         if (index == -1 || distanceTo(t.locate()) <= distanceTo(e.get(index).locate())) index = i;
                         break;
+                    case STRONG:
+                        if(index == -1 || t.maxHealth() >= e.get(index).maxHealth()) index = i;
                 }
             }
         }
@@ -135,7 +138,8 @@ public abstract class TurretGunBase extends Actor {
             case FIRST: mode = Targeting.LAST; break;
             case LAST: mode = Targeting.CLOSE; break;
             case CLOSE: mode = Targeting.FAR; break;
-            case FAR: mode = Targeting.FIRST; break;
+            case FAR: mode = Targeting.STRONG; break;
+            case STRONG: mode = Targeting.FIRST; break;
         }
     }
     public void applyUpgrade(Upgrade u){
