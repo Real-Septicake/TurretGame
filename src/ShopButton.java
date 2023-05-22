@@ -30,7 +30,7 @@ public class ShopButton extends Actor {
         getWorld().addObject(new RangeDisplay(t), t.getX(), t.getY());
         getWorld().addObject(new ModeCycle(t), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,60);
         for(int i = 0; i < paths.length; i++){
-            getWorld().addObject(paths[i], getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, 240 + (20*i));
+            getWorld().addObject(paths[i], getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, (200*(i+1))+30);
         }
     }
 
