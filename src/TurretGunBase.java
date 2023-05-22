@@ -22,6 +22,7 @@ public abstract class TurretGunBase extends Actor {
     protected int animLength;
     private TurretBase BASE;
     private boolean baseMade = false;
+    private UpgradePath[] paths;
 
 
     public TurretGunBase(double r, int d, int cool, int anim){
@@ -50,9 +51,9 @@ public abstract class TurretGunBase extends Actor {
             if(BASE.canPlace()){
                 if (BASE.buying) {
                     BASE.buying = false;
-                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this);
+                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this, paths);
                 }else{
-                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this);
+                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this, paths);
                 }
             }
         }
@@ -141,6 +142,9 @@ public abstract class TurretGunBase extends Actor {
             case FAR: mode = Targeting.STRONG; break;
             case STRONG: mode = Targeting.FIRST; break;
         }
+    }
+    protected void setPaths(UpgradePath... upPaths){
+        paths = upPaths;
     }
     public void applyUpgrade(Upgrade u){
         alterDamage(u.getDamage());
