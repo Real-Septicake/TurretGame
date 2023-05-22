@@ -21,7 +21,7 @@ public class TurretBuy<T extends TurretGunBase> extends ShopCloseRemoves {
     public void act() {
         if(Greenfoot.mouseClicked(this) && Cash.getCash() >= COST){
             getWorld().addObject(TURRET.get(), 0, 0);
-            Cash.alterCash(-COST);
+            Cash.alterCash(-TURRET.get().getValue());
             getWorld().getObjects(ShopButton.class).get(0).close();
         }
     }

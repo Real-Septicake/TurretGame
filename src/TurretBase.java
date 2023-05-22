@@ -4,15 +4,9 @@ public class TurretBase extends Actor
 {
     int[] w;
     int[] h;
-
-    int id;
-    private static int count = 0;
     public boolean buying = true;
     public TurretBase(GreenfootImage image){
         setImage(image);
-        //System.out.println("Before: " + count);
-        id = count++;
-        //System.out.println("Count After: " + count);
         h = new int[]{-(getImage().getHeight()/2), getImage().getHeight()/2};
         w = new int[]{-(getImage().getWidth()/2), getImage().getWidth()/2};
     }
@@ -49,9 +43,5 @@ public class TurretBase extends Actor
 
     public boolean canPlace(){
         return bounds() && place();
-    }
-
-    public int getID(){
-        return id;
     }
 }
