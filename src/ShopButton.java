@@ -21,8 +21,8 @@ public class ShopButton extends Actor {
 
     private void openTurret(){
         open();
-        getWorld().addObject(new TurretBuy<>(50, TurretBasic::new),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,50);
-        getWorld().addObject(new TurretBuy<>(100, TurretSniper::new), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, 175);
+        getWorld().addObject(new TurretBuy<>(TurretBasic::new),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,50);
+        getWorld().addObject(new TurretBuy<>(TurretSniper::new), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, 175);
     }
 
     public void openUpgrade(TurretGunBase t, UpgradePath... paths){
@@ -32,6 +32,7 @@ public class ShopButton extends Actor {
         for(int i = 0; i < paths.length; i++){
             getWorld().addObject(paths[i], getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, (200*(i+1))+30);
         }
+        getWorld().addObject(new SellButton(t), getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2, getWorld().getHeight()-40);
     }
 
     private void open(){

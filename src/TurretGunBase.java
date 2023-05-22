@@ -23,7 +23,7 @@ public abstract class TurretGunBase extends Actor {
     private TurretBase BASE;
     private boolean baseMade = false;
     private UpgradePath[] paths;
-    private int value = 0;
+    private int value;
     private final int cost;
 
     public TurretGunBase(double r, int d, int cool, int anim, int c){
@@ -32,6 +32,7 @@ public abstract class TurretGunBase extends Actor {
         cooldown = cool;
         animLength = anim;
         cost = c;
+        value = c;
     }
 
     public void act(){
@@ -42,7 +43,7 @@ public abstract class TurretGunBase extends Actor {
             getWorld().addObject(new RangeDisplay(this), 0, 0);
         }
         if(BASE.buying && Greenfoot.isKeyDown("escape")){
-
+            remove();
         }
         if(!BASE.buying) {
             aim();
@@ -130,7 +131,11 @@ public abstract class TurretGunBase extends Actor {
 
     public abstract String getName();
     public int getValue(){
-        return (BASE.buying)?cost:value;
+        return (int)(value*0.9);
+    }
+
+    public int getCost() {
+        return cost;
     }
 
     protected abstract void animate(boolean cool);
@@ -159,5 +164,12 @@ public abstract class TurretGunBase extends Actor {
         alterCooldown(u.getCooldown());
         alterRange(u.getRange());
         alterAnimTime(u.getAnim());
+        value += u.getCost();
+    }
+    public void remove(){
+        getWorld().getObjects(ShopButton.class).get(0).close();
+        Cash.alterCash((BASE.buying)?getCost():getValue());
+        getWorld().removeObject(BASE);
+        getWorld().removeObject(this);
     }
 }

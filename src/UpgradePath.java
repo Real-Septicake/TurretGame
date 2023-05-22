@@ -15,7 +15,7 @@ public class UpgradePath extends ShopCloseRemoves {
     }
     public void act(){
         if(Greenfoot.mouseClicked(this) && Cash.getCash() >= getCurrent().getCost()){
-            Cash.alterCash(getCurrent().getCost());
+            Cash.alterCash(-getCurrent().getCost());
             if(TURRET != null){
                 TURRET.applyUpgrade(getCurrent());
             }

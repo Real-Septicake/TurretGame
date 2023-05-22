@@ -6,7 +6,7 @@ public class TurretSniper extends TurretGunBase
     private static final GreenfootImage BASE = new GreenfootImage("SnipeyBase.png");
 
     public TurretSniper(){
-        super(250,3,75,30);
+        super(250,3,75,30, 100);
         setImage(TURRET_NORM);
     }
 

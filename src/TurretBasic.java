@@ -7,7 +7,7 @@ public class TurretBasic extends TurretGunBase {
     public TurretBasic(){
         super(200, 1, 30, 8, 50);
         setPaths(new UpgradePath(this,
-                        new Upgrade(20,0,0,0,null,"11", 0),
+                        new Upgrade(20,0,0,0,null,"11", 10),
                         new Upgrade(20,0,0,0,null,"12", 0)),
                 new UpgradePath(this,
                         new Upgrade(0,0,0,0,null,"21",0),

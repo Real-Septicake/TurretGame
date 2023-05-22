@@ -9,7 +9,7 @@ public class WaveStart extends Actor {
         setImage(start);
     }
     public void act() {
-        if(!isGoing && Greenfoot.mouseClicked(this)){
+        if(!isGoing && (Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("space"))){
             isGoing = true;
             getWorld().getObjects(Spawner.class).get(0).startWave();
         }
