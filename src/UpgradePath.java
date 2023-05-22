@@ -28,7 +28,7 @@ public class UpgradePath extends ShopCloseRemoves {
         gi.drawImage(getCurrent().getImage(), 0, 0);
         GreenfootImage text = new GreenfootImage(getCurrent().getName(), 24, Color.BLACK, null);
         gi.drawImage(text, gi.getWidth()/2 - text.getWidth()/2, 120);
-        GreenfootImage text2 = new GreenfootImage("$"+FORMATTER.format(getCurrent().getCost()), 24, Color.BLACK, null);
+        GreenfootImage text2 = new GreenfootImage(((getCurrent()!=MAX_UPGRADE)?"$"+FORMATTER.format(getCurrent().getCost()):""), 24, Color.BLACK, null);
         gi.drawImage(text2, (gi.getWidth()/2) - text2.getWidth()/2, 144);
         setImage(gi);
     }

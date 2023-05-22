@@ -37,4 +37,7 @@ public class Spawner extends Actor {
             getWorld().addObject(new EnemySpawner<>(HeavyE::new, (int)Math.ceil(wave*(wave*0.075)), (475/wave)), 0, 0);
         }
     }
+    public static int getWave(){
+        return wave;
+    }
 }

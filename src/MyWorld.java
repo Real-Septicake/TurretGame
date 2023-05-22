@@ -20,9 +20,10 @@ public class MyWorld extends World {
         setPaintOrder(PathFollow.class, WaveStart.class, ShopButton.class, TurretBuy.class, ModeCycle.class, UpgradePath.class, ShopBG.class, TurretGunBase.class, BackGround.class, TurretBase.class, RangeDisplay.class, Enemy.class, Counter.class);
         addObject(new EnemyPath(), getWidth()/2, getHeight()/2);
         addObject(new BackGround(), getWidth()/2, getHeight()/2);
-        addObject(new WaveStart(), 45, 110);
+        addObject(new WaveStart(), 45, 125);
         addObject(new Cash(START_CASH),Cash.START_X_POS,23);
-        addObject(new Lives(START_LIVES),Lives.START_X_POS,58);
+        addObject(new Lives(START_LIVES),Lives.START_X_POS,53);
+        addObject(new Wave(),Wave.START_X_POS,83);
         addObject(new Spawner(), 0, 0);
         addObject(new ShopButton(),getWidth()-ShopButton.getWidth()/2,50);
     }
