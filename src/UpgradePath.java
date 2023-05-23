@@ -32,7 +32,7 @@ public class UpgradePath extends ShopCloseRemoves {
         gi.drawImage(text, gi.getWidth()/2 - text.getWidth()/2, 120);
         gi.drawImage(text2, (gi.getWidth()/2) - text2.getWidth()/2, 120+ text.getHeight());
         if(previous != null){
-            setLocation(getX(), getY()-(previous.getHeight() - gi.getHeight()));
+            setLocation(getX(), getY()-((previous.getHeight() - gi.getHeight())/2));
         }
         setImage(gi);
         previous = gi;
