@@ -6,13 +6,13 @@ public class TurretSniper extends TurretGunBase
     private static final GreenfootImage BASE = new GreenfootImage("SnipeyBase.png");
 
     public TurretSniper(){
-        super(250,3,75,30, 100);
+        super(250,3,75,20, 100);
         setPaths(new UpgradePath(this,
                         new Upgrade(0,0,0,0,null,"11",0),
                         new Upgrade(0,0,0,0,null,"12",0)),
                 new UpgradePath(this,
                         new Upgrade(0,0,0,0,null,"21",0),
-                        new Upgrade(0,0,0,0,null,"22",0)));
+                        new Upgrade(0,0,-50,-15,null,"Even Faster Firing",0)));
         setImage(TURRET_NORM);
     }
 
@@ -23,7 +23,7 @@ public class TurretSniper extends TurretGunBase
 
     @Override
     public int getOffset() {
-        return 12;
+        return (MyWorld.Timer - lastAnimCheck >= animLength)?12:8;
     }
 
     @Override
