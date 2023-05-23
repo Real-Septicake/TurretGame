@@ -8,6 +8,7 @@ public class UpgradePath extends ShopCloseRemoves {
     private final Upgrade[] upgrades;
     private final TurretGunBase TURRET;
     private static final DecimalFormat FORMATTER = new DecimalFormat("###,###");
+    private GreenfootImage previous;
     public UpgradePath(TurretGunBase t, Upgrade... u){
         upgrades = u;
         updateImage();
@@ -30,7 +31,11 @@ public class UpgradePath extends ShopCloseRemoves {
         gi.drawImage(getCurrent().getImage(), 0, 0);
         gi.drawImage(text, gi.getWidth()/2 - text.getWidth()/2, 120);
         gi.drawImage(text2, (gi.getWidth()/2) - text2.getWidth()/2, 120+ text.getHeight());
+        if(previous != null){
+            setLocation(getX(), getY()-(previous.getHeight() - gi.getHeight()));
+        }
         setImage(gi);
+        previous = gi;
     }
     private Upgrade getCurrent(){
         return (upgradeNum>=upgrades.length)?MAX_UPGRADE:upgrades[upgradeNum];
