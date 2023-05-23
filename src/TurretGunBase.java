@@ -57,7 +57,7 @@ public abstract class TurretGunBase extends Actor {
             if(BASE.canPlace()){
                 if (BASE.buying) {
                     BASE.buying = false;
-                    getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this, paths);
+                    getWorld().getObjects(ShopButton.class).get(0).openTurret();
                 }else{
                     getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this, paths);
                 }

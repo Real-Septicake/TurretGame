@@ -16,7 +16,7 @@ public class SellButton extends ShopCloseRemoves {
         gi.drawImage(button, 0, 0);
         gi.drawImage(text, button.getWidth()+10, gi.getHeight()/2 - text.getHeight()/2);
         setImage(gi);
-        if(Greenfoot.mouseClicked(this)){
+        if(Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("backspace")){
             TURRET.remove();
         }
     }

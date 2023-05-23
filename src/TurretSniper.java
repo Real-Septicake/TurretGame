@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
 public class TurretSniper extends TurretGunBase
 {
@@ -7,6 +7,12 @@ public class TurretSniper extends TurretGunBase
 
     public TurretSniper(){
         super(250,3,75,30, 100);
+        setPaths(new UpgradePath(this,
+                        new Upgrade(0,0,0,0,null,"11",0),
+                        new Upgrade(0,0,0,0,null,"12",0)),
+                new UpgradePath(this,
+                        new Upgrade(0,0,0,0,null,"21",0),
+                        new Upgrade(0,0,0,0,null,"22",0)));
         setImage(TURRET_NORM);
     }
 
