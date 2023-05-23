@@ -4,17 +4,21 @@ public class ShopButton extends Actor {
     private static final GreenfootImage TO_OPEN = new GreenfootImage("ShopOpenButton.png");
     private static final GreenfootImage TO_CLOSE = new GreenfootImage("ShopCloseButton.png");
     private static boolean isOpen = false;
+    private static boolean buttonIsDown = false;
     public ShopButton(){
         setImage(TO_OPEN);
         isOpen = false;
     }
     public void act() {
-        if(Greenfoot.mouseClicked(this)){
+        if((Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("tab")) && !buttonIsDown){
+            buttonIsDown = true;
             if(isOpen){
                 close();
             }else{
                 openTurret();
             }
+        }else if(!Greenfoot.isKeyDown("tab")){
+            buttonIsDown = false;
         }
         setImage(isOpen? TO_CLOSE : TO_OPEN);
     }
