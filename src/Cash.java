@@ -8,7 +8,7 @@ public class Cash extends Counter {
     public static final int START_X_POS = 77;
     private static final DecimalFormat FORMATTER = new DecimalFormat("###,###");
     public Cash(int c){
-        setImage(new GreenfootImage(PREFIX+c, 35, Color.LIGHT_GRAY, null));
+        setImage(new GreenfootImage(PREFIX+FORMATTER.format(c), 35, Color.LIGHT_GRAY, null));
         cash = c;
     }
     public void act(){
