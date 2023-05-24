@@ -11,9 +11,10 @@ public class Enemy extends Actor {
     private final int value;
 
     public Enemy(int mh, int s, int o, int v) {
+        mh = (int)(Math.max((mh * Spawner.getWave())/10.0, mh));
         health = mh;
         maxHealth = mh;
-        speed = s;
+        speed = (int)Math.min(Math.max((s * Spawner.getWave())/10.0, s), 3);
         offset = o;
         value = v;
     }
