@@ -71,34 +71,33 @@ public abstract class TurretGunBase extends Actor {
 
     protected void aim(){
         List<Enemy> e = getWorld().getObjects(Enemy.class);
-        int index = -1;
-        for (int i = 0; i < e.size(); i++) {
-            Enemy t = e.get(i);
+        Enemy target = null;
+        for (Enemy t : e) {
             if (distanceTo(t.locate()) <= range) {
                 switch (mode) {
                     case FIRST:
-                        if (index == -1 || t.progress() >= e.get(index).progress()) index = i;
+                        if (target == null || t.progress() >= target.progress()) target = t;
                         break;
                     case LAST:
-                        if (index == -1 || t.progress() <= e.get(index).progress()) index = i;
+                        if (target == null || t.progress() <= target.progress()) target = t;
                         break;
                     case FAR:
-                        if (index == -1 || distanceTo(t.locate()) >= distanceTo(e.get(index).locate())) index = i;
+                        if (target == null || distanceTo(t.locate()) >= distanceTo(target.locate())) target = t;
                         break;
                     case CLOSE:
-                        if (index == -1 || distanceTo(t.locate()) <= distanceTo(e.get(index).locate())) index = i;
+                        if (target == null || distanceTo(t.locate()) <= distanceTo(target.locate())) target = t;
                         break;
                     case STRONG:
-                        if(index == -1 || t.maxHealth() >= e.get(index).maxHealth()) index = i;
+                        if(target == null || t.maxHealth() >= target.maxHealth()) target = t;
                 }
             }
         }
-        if(index != -1){
+        if(target != null){
             if(MyWorld.Timer - lastAnimCheck >= animLength){
-                turnTowards(e.get(index).getX(), e.get(index).getY());
+                turnTowards(target.getX(), target.getY());
             }
             if(MyWorld.Timer - lastFireCheck >= cooldown){
-                e.get(index).damage(damage);
+                target.damage(damage);
                 lastFireCheck = MyWorld.Timer;
                 lastAnimCheck = MyWorld.Timer;
             }
