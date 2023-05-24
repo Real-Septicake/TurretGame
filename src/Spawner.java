@@ -15,13 +15,12 @@ public class Spawner extends Actor {
     }
     public void act() {
         if(WaveStart.isGoing()){
-            boolean done = true;
             for(EnemySpawner es : getWorld().getObjects(EnemySpawner.class)){
                 if(!es.isFinished()){
-                    done = false;
+                    return;
                 }
             }
-            if(done && getWorld().getObjects(Enemy.class).size() == 0){
+            if(getWorld().getObjects(Enemy.class).size() == 0){
                 getWorld().getObjects(WaveStart.class).get(0).waveDone();
                 wave++;
             }
