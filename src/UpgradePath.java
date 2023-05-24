@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 public class UpgradePath extends ShopCloseRemoves {
     private int upgradeNum = 0;
+    private static final int BASE_HEIGHT = 168;
     private static final Upgrade MAX_UPGRADE = new Upgrade(0,0,0,0,null,"",Integer.MAX_VALUE);
     private final Upgrade[] upgrades;
     private final TurretGunBase TURRET;

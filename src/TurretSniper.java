@@ -8,11 +8,11 @@ public class TurretSniper extends TurretGunBase
     public TurretSniper(){
         super(250,3,75,20, 100);
         setPaths(new UpgradePath(this,
-                        new Upgrade(0,0,0,0,null,"11",0),
-                        new Upgrade(0,0,0,0,null,"12",0)),
+                        new Upgrade(45,1,10,3,null,"AP Rounds",95),
+                        new Upgrade(125,4,30,9,null,".50 BMG",400)),
                 new UpgradePath(this,
-                        new Upgrade(0,0,0,0,null,"21",0),
-                        new Upgrade(0,0,-50,-15,null,"Even Faster Firing",0)));
+                        new Upgrade(0,0,-10,-6,null,"Faster Firing",70),
+                        new Upgrade(0,0,-50,-15,null,"Semi-Auto\nRifle",280)));
         setImage(TURRET_NORM);
     }
 
