@@ -3,7 +3,15 @@ import greenfoot.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * This class contains the basic requirements for every Turret gun
+ * <p>
+ * All Turret gun classes must extend this class
+ */
 public abstract class TurretGunBase extends Actor {
+    /**
+     * Enum for the targeting types that each Turret uses
+     */
     private enum Targeting {
         FIRST,
         LAST,
@@ -26,6 +34,14 @@ public abstract class TurretGunBase extends Actor {
     private int value;
     private final int cost;
 
+    /**
+     * Creates a Turret gun based on the specified values
+     * @param r The range of the Turret
+     * @param d The damage the Turret does to Enemies
+     * @param cool The Cooldown between attacks for this Turret
+     * @param anim Length of the Turret's animation
+     * @param c The cost of the Turret
+     */
     public TurretGunBase(double r, int d, int cool, int anim, int c){
         range = r;
         damage = d;
@@ -65,6 +81,11 @@ public abstract class TurretGunBase extends Actor {
         }
     }
 
+    /**
+     * Method to check the distance between the Turret and the specified Point
+     * @param p Point to check the distance to
+     * @return The distance to the specified Point
+     */
     private double distanceTo(Point p){
         return Math.sqrt(Math.pow((getX()-p.x),2)+Math.pow((getY()-p.y),2));
     }

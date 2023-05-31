@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * Only used to make closing the shop more streamlined, allows for one getObjects call to get everything
+ * All objects that need to be removed must extend this class
  */
 public class ShopCloseRemoves extends Actor {
 }

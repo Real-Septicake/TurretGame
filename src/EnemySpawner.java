@@ -9,6 +9,12 @@ public class EnemySpawner<T extends Enemy> extends Actor {
     private final int delay;
     private int lastCheck = -1;
 
+    /**
+     * Creates a spawner for the specified Enemy with the inputted parameters
+     * @param enemyType Supplier for type of Enemy to be spawned
+     * @param enemyCount Amount of Enemies to be spawned for that Wave
+     * @param spawnDelay Delay between Enemy spawns for that Wave
+     */
     public EnemySpawner(Supplier<T> enemyType, int enemyCount, int spawnDelay){
         GreenfootImage i = new GreenfootImage(1, 1);
         i.setTransparency(0);
@@ -24,6 +30,10 @@ public class EnemySpawner<T extends Enemy> extends Actor {
             lastCheck = MyWorld.Timer;
         }
     }
+
+    /**
+     * Returns if the Spawner has spawned all of its enemies
+     */
     public boolean isFinished(){
         return count >= total;
     }

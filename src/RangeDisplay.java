@@ -1,5 +1,8 @@
 import greenfoot.*;
 
+/**
+ * A class to display the range of the selected Turret
+ */
 public class RangeDisplay extends ShopCloseRemoves {
     private final TurretGunBase TURRET;
     public RangeDisplay(TurretGunBase t){

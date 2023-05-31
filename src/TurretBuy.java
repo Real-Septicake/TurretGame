@@ -2,10 +2,20 @@ import greenfoot.*;
 
 import java.util.function.Supplier;
 
+/**
+ * A class for creating the buttons to buy Turrets
+ * @param <T> The Turret type to be bought
+ */
 public class TurretBuy<T extends TurretGunBase> extends ShopCloseRemoves {
     private final int COST;
     private final Supplier<T> TURRET;
     private final String BIND;
+
+    /**
+     * Creates a TurretBuy object based on the specified
+     * @param supplier Supplier for the Turret type to buy
+     * @param bind Key to "quick-buy" the Turret
+     */
     public TurretBuy(Supplier<T> supplier, String bind){
         TURRET = supplier;
         TurretGunBase TU = supplier.get();

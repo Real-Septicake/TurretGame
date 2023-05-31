@@ -2,6 +2,9 @@ import greenfoot.*;
 
 import java.awt.*;
 
+/**
+ * A superclass for all Enemies
+ */
 public class Enemy extends Actor {
     private int health;
     private final int maxHealth;
@@ -10,6 +13,13 @@ public class Enemy extends Actor {
     private final int offset;
     private final int value;
 
+    /**
+     * Creates an Enemy with the specified stats
+     * @param mh Maximum health of Enemy
+     * @param s Speed of Enemy
+     * @param o Offset of Pathing checks
+     * @param v Money gained on Enemy death
+     */
     public Enemy(int mh, int s, int o, int v) {
         mh = (int)(Math.max((mh * Spawner.getWave())/10.0, mh));
         health = mh;
@@ -56,10 +66,18 @@ public class Enemy extends Actor {
         move(1);
         distance += 1;
     }
+
+    /**
+     * Returns the location of the Enemy in the form of a Point
+     */
     public Point locate(){
         return new Point(getX(), getY());
     }
 
+    /**
+     * Returns the progress the Enemy has made across the path
+     * @return
+     */
     public double progress(){
         return distance;
     }

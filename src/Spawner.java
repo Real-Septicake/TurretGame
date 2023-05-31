@@ -1,5 +1,8 @@
 import greenfoot.*;
 
+/**
+ * Controls the creation of Enemy spawners and the progression of the waves
+ */
 public class Spawner extends Actor {
     private static int wave = 0;
 

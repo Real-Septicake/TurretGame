@@ -1,7 +1,6 @@
 import greenfoot.*;
 
-public class TurretBase extends Actor
-{
+public class TurretBase extends Actor{
     int[] w;
     int[] h;
     public boolean buying = true;
