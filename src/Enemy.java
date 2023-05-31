@@ -20,8 +20,19 @@ public class Enemy extends Actor {
     }
 
     public void act() {
-        path();
-        move();
+        boolean atEdge = false;
+        for(int i = 0; i <= speed; i++){
+            path();
+            move();
+            if(isAtEdge()){
+                atEdge = true;
+                break;
+            }
+        }
+        if(atEdge){
+            Lives.alterLives(-maxHealth);
+            getWorld().removeObject(this);
+        }
     }
     public void damage(int d) {
         health -= d;
@@ -42,12 +53,8 @@ public class Enemy extends Actor {
         getWorld().removeObject(path);
     }
     private void move(){
-        move(speed);
-        distance += speed;
-        if(isAtEdge()){
-            Lives.alterLives(-maxHealth);
-            getWorld().removeObject(this);
-        }
+        move(1);
+        distance += 1;
     }
     public Point locate(){
         return new Point(getX(), getY());
