@@ -15,10 +15,6 @@ public class TurretBasic extends TurretGunBase {
         setImage(TURRET_NORM);
     }
 
-    public void act() {
-        super.act();
-    }
-
     @Override
     public int getOffset() {
         return (MyWorld.Timer - lastAnimCheck >= animLength)?8:12;

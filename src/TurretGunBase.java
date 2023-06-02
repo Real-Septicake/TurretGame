@@ -28,8 +28,7 @@ public abstract class TurretGunBase extends Actor {
     private int lastFireCheck = -1;
     protected int lastAnimCheck = -1;
     protected int animLength;
-    private TurretBase BASE;
-    private boolean baseMade = false;
+    private final TurretBase BASE;
     private UpgradePath[] paths;
     private int value;
     private final int cost;
@@ -49,15 +48,13 @@ public abstract class TurretGunBase extends Actor {
         animLength = anim;
         cost = c;
         value = c;
+
+        BASE = new TurretBase(getBaseImage());
+        getWorld().addObject(BASE, 0, 0);
+        getWorld().addObject(new RangeDisplay(this), 0, 0);
     }
 
     public void act(){
-        if(!baseMade){
-            BASE = new TurretBase(getBaseImage());
-            getWorld().addObject(BASE, 0, 0);
-            baseMade = true;
-            getWorld().addObject(new RangeDisplay(this), 0, 0);
-        }
         if(BASE.buying && Greenfoot.isKeyDown("escape")){
             remove();
         }
@@ -143,12 +140,24 @@ public abstract class TurretGunBase extends Actor {
         animLength += val;
     }
 
+    /**
+     * @return The distance the Turret needs to move for it to appear centered
+     */
     public abstract int getOffset();
 
+    /**
+     * @return The image used for the Turret's base
+     */
     public abstract GreenfootImage getBaseImage();
 
+    /**
+     * @return The base image of the Turret
+     */
     public abstract GreenfootImage getTurretImage();
 
+    /**
+     * @return The display name of the Turret
+     */
     public abstract String getName();
     public int getValue(){
         return (int)(value*0.9);
@@ -158,6 +167,10 @@ public abstract class TurretGunBase extends Actor {
         return cost;
     }
 
+    /**
+     * Set the image of the Turret based on if the animation cooldown is over
+     * @param cool If the animation cooldown is over
+     */
     protected abstract void animate(boolean cool);
 
     public TurretBase getBase(){
@@ -176,9 +189,21 @@ public abstract class TurretGunBase extends Actor {
             case STRONG: mode = Targeting.FIRST; break;
         }
     }
+
+    /**
+     * Sets the upgrade paths of the Turret
+     * @param upPaths Upgrade Paths to give the Turret
+     *
+     * @implNote Should be called in Turret type constructor
+     */
     protected void setPaths(UpgradePath... upPaths){
         paths = upPaths;
     }
+
+    /**
+     * Applies the upgrade properties to the Turret
+     * @param u Upgrade to apply
+     */
     public void applyUpgrade(Upgrade u){
         alterDamage(u.getDamage());
         alterCooldown(u.getCooldown());
@@ -186,6 +211,10 @@ public abstract class TurretGunBase extends Actor {
         alterAnimTime(u.getAnim());
         value += u.getCost();
     }
+
+    /**
+     * Sells the Turret, returning the full cost if it's still being bought, or returning 90% of the total value if not
+     */
     public void remove(){
         getWorld().getObjects(ShopButton.class).get(0).close();
         Cash.alterCash((BASE.buying)?getCost():getValue());

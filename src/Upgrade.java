@@ -9,6 +9,17 @@ public class Upgrade extends Actor {
     private final String NAME;
     private final int ANIMATION_LENGTH_CHANGE;
     private final int COST;
+
+    /**
+     * Creates an Upgrade based on the inputted values
+     * @param r Modification to the Turret's range
+     * @param d Modification to the Turret's damage
+     * @param cd Modification to the Turret's cooldown
+     * @param a Modification to the Turret's animation time
+     * @param image Image of the Upgrade (if null then placeholder image is used)
+     * @param n Name of the Upgrade
+     * @param c Cost of the Upgrade
+     */
     public Upgrade(double r, int d, int cd, int a, GreenfootImage image, String n, int c){
         RANGE = r;
         DAMAGE = d;
