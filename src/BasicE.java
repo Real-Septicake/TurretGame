@@ -3,7 +3,4 @@ public class BasicE extends Enemy {
         super(3, 3, 2, 2);
         setImage("BasicEnemy.png");
     }
-    public void act() {
-        super.act();
-    }
 }

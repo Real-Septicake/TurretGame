@@ -41,6 +41,7 @@ public class ShopButton extends Actor {
 
     private void open(){
         close();
+        getWorld().removeObjects(getWorld().getObjects(RangeDisplay.class));
         getWorld().addObject(new ShopBG(),getWorld().getWidth()-ShopBG.IMAGE.getWidth()/2,getWorld().getHeight()/2);
         setLocation(getX()-ShopBG.IMAGE.getWidth(),getY());
         isOpen = true;

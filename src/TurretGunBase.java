@@ -28,7 +28,7 @@ public abstract class TurretGunBase extends Actor {
     private int lastFireCheck = -1;
     protected int lastAnimCheck = -1;
     protected int animLength;
-    private final TurretBase BASE;
+    private TurretBase base;
     private UpgradePath[] paths;
     private int value;
     private final int cost;
@@ -48,28 +48,31 @@ public abstract class TurretGunBase extends Actor {
         animLength = anim;
         cost = c;
         value = c;
+    }
 
-        BASE = new TurretBase(getBaseImage());
-        getWorld().addObject(BASE, 0, 0);
-        getWorld().addObject(new RangeDisplay(this), 0, 0);
+    @Override
+    protected void addedToWorld(World world) {
+        base = new TurretBase(getBaseImage());
+        world.addObject(base, 0, 0);
+        world.addObject(new RangeDisplay(this), 0, 0);
     }
 
     public void act(){
-        if(BASE.buying && Greenfoot.isKeyDown("escape")){
+        if(base.buying && Greenfoot.isKeyDown("escape")){
             remove();
         }
-        if(!BASE.buying) {
+        if(!base.buying) {
             aim();
-            setLocation(BASE.getX(), BASE.getY());
+            setLocation(base.getX(), base.getY());
             move(getOffset());
         }else if(Greenfoot.getMouseInfo() != null){
             setLocation(Greenfoot.getMouseInfo().getX(), Greenfoot.getMouseInfo().getY());
             move(getOffset());
         }
         if(Greenfoot.mouseClicked(this) ){
-            if(BASE.canPlace()){
-                if (BASE.buying) {
-                    BASE.buying = false;
+            if(base.canPlace()){
+                if (base.buying) {
+                    base.buying = false;
                     getWorld().getObjects(ShopButton.class).get(0).openTurret();
                 }else{
                     getWorld().getObjects(ShopButton.class).get(0).openUpgrade(this, paths);
@@ -88,26 +91,24 @@ public abstract class TurretGunBase extends Actor {
     }
 
     protected void aim(){
-        List<Enemy> e = getWorld().getObjects(Enemy.class);
+        List<Enemy> e = getObjectsInRange((int) range, Enemy.class);
         Enemy target = null;
         for (Enemy t : e) {
-            if (distanceTo(t.locate()) <= range) {
-                switch (mode) {
-                    case FIRST:
-                        if (target == null || t.progress() >= target.progress()) target = t;
-                        break;
-                    case LAST:
-                        if (target == null || t.progress() <= target.progress()) target = t;
-                        break;
-                    case FAR:
-                        if (target == null || distanceTo(t.locate()) >= distanceTo(target.locate())) target = t;
-                        break;
-                    case CLOSE:
-                        if (target == null || distanceTo(t.locate()) <= distanceTo(target.locate())) target = t;
-                        break;
-                    case STRONG:
-                        if(target == null || t.maxHealth() >= target.maxHealth()) target = t;
-                }
+            switch (mode) {
+                case FIRST:
+                    if (target == null || t.progress() >= target.progress()) target = t;
+                    break;
+                case LAST:
+                    if (target == null || t.progress() <= target.progress()) target = t;
+                    break;
+                case FAR:
+                    if (target == null || distanceTo(t.locate()) >= distanceTo(target.locate())) target = t;
+                    break;
+                case CLOSE:
+                    if (target == null || distanceTo(t.locate()) <= distanceTo(target.locate())) target = t;
+                    break;
+                case STRONG:
+                    if(target == null || t.maxHealth() >= target.maxHealth()) target = t;
             }
         }
         if(target != null){
@@ -174,7 +175,7 @@ public abstract class TurretGunBase extends Actor {
     protected abstract void animate(boolean cool);
 
     public TurretBase getBase(){
-        return BASE;
+        return base;
     }
 
     public String getMode(){
@@ -217,8 +218,8 @@ public abstract class TurretGunBase extends Actor {
      */
     public void remove(){
         getWorld().getObjects(ShopButton.class).get(0).close();
-        Cash.alterCash((BASE.buying)?getCost():getValue());
-        getWorld().removeObject(BASE);
+        Cash.alterCash((base.buying)?getCost():getValue());
+        getWorld().removeObject(base);
         getWorld().removeObject(this);
     }
 }

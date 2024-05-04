@@ -2,15 +2,16 @@ import greenfoot.*;
 
 public class ModeCycle extends ShopCloseRemoves {
     private final TurretGunBase TURRET;
-    private boolean start = false;
     public ModeCycle(TurretGunBase t){
         TURRET = t;
     }
+
+    @Override
+    protected void addedToWorld(World world) {
+        updateImage();
+    }
+
     public void act() {
-        if(!start){
-            updateImage();
-            start = true;
-        }
         if(Greenfoot.mouseClicked(this)){
             TURRET.cycleMode();
             updateImage();

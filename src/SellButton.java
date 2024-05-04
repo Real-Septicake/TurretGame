@@ -9,13 +9,17 @@ public class SellButton extends ShopCloseRemoves {
         TURRET = t;
     }
 
-    public void act() {
+    @Override
+    protected void addedToWorld(World world) {
         GreenfootImage button = new GreenfootImage("Sell", 30, Color.BLACK, Color.RED);
         GreenfootImage text = new GreenfootImage("$"+FORMATTER.format(TURRET.getValue()), 25, Color.DARK_GRAY,null);
         GreenfootImage gi = new GreenfootImage(button.getWidth()+text.getWidth()+10, Math.max(button.getHeight(), text.getHeight()));
         gi.drawImage(button, 0, 0);
         gi.drawImage(text, button.getWidth()+10, gi.getHeight()/2 - text.getHeight()/2);
         setImage(gi);
+    }
+
+    public void act() {
         if(Greenfoot.mouseClicked(this) || Greenfoot.isKeyDown("backspace")){
             TURRET.remove();
         }
